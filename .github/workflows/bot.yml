@@ -3,10 +3,10 @@ name: Vinted Bot
 on:
   schedule:
     - cron: "*/5 * * * *" # co 5 minut
-  workflow_dispatch:     # możliwość uruchomienia ręcznego
+  workflow_dispatch:
 
 jobs:
-  run:
+  bot:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -23,6 +23,6 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; else pip install requests beautifulsoup4; fi
 
       - name: Run bot
-        run: python bot.py
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: python bot.py
